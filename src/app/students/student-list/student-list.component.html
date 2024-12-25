@@ -1,0 +1,35 @@
+<div class="d-flex flex-wrap p-5 m-5" *ngIf="studentData.length > 0; else noData">
+    <div *ngFor="let student of studentData; let i = index" class="card m-3" style="width: 18rem; border-radius: 10px; overflow: hidden;">
+      <!-- Image placeholder for student image -->
+      <img *ngIf="student.image" [src]="student.image" class="card-img-top" alt="Student Image" style="height: 200px; object-fit: cover;">
+      <div class="card-body">
+        <h5 class="card-title mb-3">{{ student.email }}</h5>
+        <p class="card-text"><b>Description:</b> {{ student.description }}</p>
+
+      </div>
+      <div class="card-footer d-flex flex-wrap gap-5 justify-content-between align-items-center bg-dark text-white" style="border-top: 1px solid #444; padding: 0.5rem 1rem;">
+        <h5 *ngIf="student.name; else noName" class="m-0 bg-white text-dark px-3 py-1" style="border-radius: 5px; font-size: 0.9rem;">{{ student.name }}</h5>
+        <button 
+          class="btn btn-sm btn-danger px-3 py-1" 
+          (click)="deleteStudent(i)" 
+          style="border-radius: 5px; font-size: 0.9rem;"
+          title="Delete Student"
+        >
+          Delete
+        </button>
+      </div>
+      
+      <ng-template #noName>
+        <small class="m-0">Student Information</small>
+      </ng-template>
+      
+    </div>
+  </div>
+  
+  <!-- Show a message if no data is found -->
+  <ng-template #noData>
+    <p class="text-center w-100">No student data available.</p>
+  </ng-template>
+  <ng-template #noName>
+    <small class="text-center w-100">Student Information</small>
+  </ng-template>
